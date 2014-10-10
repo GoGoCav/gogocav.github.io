@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Canvas is me!]]></title>
+  <title><![CDATA[Canvas Hsu]]></title>
   <link href="http://GoGoCav.github.io/atom.xml" rel="self"/>
   <link href="http://GoGoCav.github.io/"/>
-  <updated>2014-10-10T21:43:05+08:00</updated>
+  <updated>2014-10-10T22:57:47+08:00</updated>
   <id>http://GoGoCav.github.io/</id>
   <author>
     <name><![CDATA[Canvas Hsu]]></name>
@@ -12,5 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hello Big Big World, I'm Canvas Hsu]]></title>
+    <link href="http://GoGoCav.github.io/blog/2014/10/10/hello-big-big-world/"/>
+    <updated>2014-10-10T22:34:02+08:00</updated>
+    <id>http://GoGoCav.github.io/blog/2014/10/10/hello-big-big-world</id>
+    <content type="html"><![CDATA[<p>哈哈，俗套标题开场~</p>
+
+<p>我是 Canvas Hsu，网络昵称是 GoGoCav - Go Go Canvas 的意思。现实生活中朋友都叫我小伍。</p>
+
+<p>我于2008年毕业于华中科技大学电子与信息工程系，一直从事金融领域信息化建设方面的工作，先后就职于恒生集团、嘉实基金、广发基金。</p>
+
+<p>2014年5月，我离开了投身6年多的基金圈，寻求职业生涯或是人生的转变。目前我是一名自由职业者，经营着一间零食店，同时将更多的时间投入到各种感兴趣的事情中，例如 iOS 应用开发/UX 设计/读书等，还想学学吉他。</p>
+
+<p>也是因此，我终于有了时间写写博客，记录和分享一些我的学习、生活经历。</p>
+
+<p>感谢你发现这里，希望这不是我们的最后一次相遇。</p>
+]]></content>
+  </entry>
   
 </feed>
