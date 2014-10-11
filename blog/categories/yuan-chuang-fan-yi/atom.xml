@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Canvas Hsu]]></title>
-  <link href="http://GoGoCav.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: 原创翻译 | Canvas Hsu]]></title>
+  <link href="http://GoGoCav.github.io/blog/categories/yuan-chuang-fan-yi/atom.xml" rel="self"/>
   <link href="http://GoGoCav.github.io/"/>
   <updated>2014-10-11T22:35:56+08:00</updated>
   <id>http://GoGoCav.github.io/</id>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[原创译文 - A Short Practical Guide to Blocks]]></title>
+    <title type="html"><![CDATA[原创译文 - a Short Practical Guide to Blocks]]></title>
     <link href="http://GoGoCav.github.io/blog/2014/10/11/translation-a-short-practical-guide-to-blocks/"/>
     <updated>2014-10-11T20:45:46+08:00</updated>
     <id>http://GoGoCav.github.io/blog/2014/10/11/translation-a-short-practical-guide-to-blocks</id>
@@ -67,16 +67,11 @@
 
 <p>The caret symbol (^) is used as a syntactic marker for blocks. For example, the following code declares a block variable taking two integers and returning an integer value. It provides the parameter list after the second caret and the implementing code within the braces, and assigns these to the Multiply variable:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="kt">int</span> <span class="p">(</span><span class="o">^</span><span class="n">Multiply</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="o">^</span><span class="p">(</span><span class="kt">int</span> <span class="n">num1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">num1</span> <span class="o">*</span> <span class="n">num2</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">Multiply</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// Result is 28.</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">int (^Multiply)(int, int) = ^(int num1, int num2) {
+    return num1 * num2;
+};
+int result = Multiply(7, 4); // Result is 28.
+</code></pre>
 
 <p>As method or function arguments, blocks are a type of callback and could be considered a form of delegation limited to the method or function. By passing in a block, calling code can customize the behavior of a method or function. When invoked, the method or function performs some work and, at the appropriate moments, calls back to the invoking code—via the block—to request additional information or to obtain application-specific behavior from it.</p>
 
@@ -86,51 +81,31 @@
 
 <blockquote><p>将块作为函数和方法的参数的一个好处是：块让调用者提供了函数和方法在被援引时的回调代码。因为这部分代码不需要在单独的方法或函数中实现，所以你的实现代码会更简单易懂。下面以 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSNotification_Class/index.html#//apple_ref/occ/cl/NSNotification">NSNotification</a> 的通知变量为例。“传统”的实现方法是，一个对象将自身添加为一个通知的观察者，然后单独定义一个方法（通过 addObserver:.. 方法中的 selector 指定）来处理通知：</p></blockquote>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span> <span class="p">{</span>
-</span><span class='line'>   <span class="p">[</span><span class="nb">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[[</span><span class="bp">NSNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span> <span class="nl">addObserver</span><span class="p">:</span><span class="nb">self</span>
-</span><span class='line'>        <span class="nl">selector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">keyboardWillShow</span><span class="p">:)</span>
-</span><span class='line'>        <span class="nl">name</span><span class="p">:</span><span class="n">UIKeyboardWillShowNotification</span> <span class="nl">object</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">keyboardWillShow:</span><span class="p">(</span><span class="bp">NSNotification</span> <span class="o">*</span><span class="p">)</span><span class="nv">notification</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Notification-handling code goes here.</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="objc">- (void)viewDidLoad {
+   [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(keyboardWillShow:)
+        name:UIKeyboardWillShowNotification object:nil];
+}
 
+- (void)keyboardWillShow:(NSNotification *)notification {
+    // Notification-handling code goes here.
+}
+</code></pre>
 
 <p>With the <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSNotificationCenter_Class/index.html#//apple_ref/occ/instm/NSNotificationCenter/addObserverForName:object:queue:usingBlock:">addObserverForName:object:queue:usingBlock:</a> method you can consolidate the notification-handling code with the method invocation:</p>
 
 <blockquote><p>通过使用<a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSNotificationCenter_Class/index.html#//apple_ref/occ/instm/NSNotificationCenter/addObserverForName:object:queue:usingBlock:">addObserverForName:object:queue:usingBlock:</a>这个方法，你可以将通知处理操作以块的形式整合到方法的调用上。</p></blockquote>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="nb">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[[</span><span class="bp">NSNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span> <span class="nl">addObserverForName</span><span class="p">:</span><span class="n">UIKeyboardWillShowNotification</span>
-</span><span class='line'>        <span class="nl">object</span><span class="p">:</span><span class="nb">nil</span> <span class="nl">queue</span><span class="p">:[</span><span class="bp">NSOperationQueue</span> <span class="n">mainQueue</span><span class="p">]</span>
-</span><span class='line'>        <span class="nl">usingBlock</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="bp">NSNotification</span> <span class="o">*</span><span class="n">notif</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="c1">// Notification-handling code goes here. </span>
-</span><span class='line'>    <span class="p">}];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">- (void)viewDidLoad {
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification
+        object:nil queue:[NSOperationQueue mainQueue]
+        usingBlock:^(NSNotification *notif) {
+            // Notification-handling code goes here. 
+    }];
+}
+</code></pre>
 
 <p>An even more valuable advantage of blocks over other forms of callback is that a block shares data in the local lexical scope. If you implement a method and in that method define a block, the block has access to the local variables and parameters of the method (including stack variables) as well as to functions and global variables, including instance variables. This access is read-only by default, but if you declare a variable with the __block modifier, you can change its value within the block. Even after the method or function enclosing a block has returned and its local scope is destroyed, the local variables persist as part of the block object as long as there is a reference to the block.</p>
 
@@ -158,23 +133,17 @@
 
 <blockquote><p>接下来的章节会逐一描述上述这些案例。在此之前，我们先快速的了解一下在框架方法中，块是怎样声明的。以 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSSet_Class/index.html#//apple_ref/occ/cl/NSSet">NSSet</a> 类的一个方法为例：</p></blockquote>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="bp">NSSet</span> <span class="o">*</span><span class="p">)</span><span class="nf">objectsPassingTest:</span><span class="p">(</span><span class="kt">BOOL</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="kt">id</span> <span class="n">obj</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">))</span><span class="nv">predicate</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">- (NSSet *)objectsPassingTest:(BOOL (^)(id obj, BOOL *stop))predicate
+</code></pre>
 
 <p>The block declaration indicates that the method passes into the block (for each enumerated item) a dynamically typed object and a by-reference Boolean value; the block returns a Boolean value. (What these parameters and return value are actually for are covered in <a href="https://developer.apple.com/library/ios/featuredarticles/Short_Practical_Guide_Blocks/index.html#//apple_ref/doc/uid/TP40009758-CH1-SW1">Enumeration</a>.) When specifying your block, begin with a caret (^) and the parenthesized argument list; follow this with the block code itself, enclosed by braces.</p>
 
 <blockquote><p>从块的声明可以看到，这个方法对每一个枚举项都向块传入两个参数：一个动态类型的对象和一个布尔类型的指针；块再返回一个布尔类型的值。（关于这些参数和返回值的具体含义请参考 <a href="https://developer.apple.com/library/ios/featuredarticles/Short_Practical_Guide_Blocks/index.html#//apple_ref/doc/uid/TP40009758-CH1-SW1">Enumeration</a> 章节。）块的声明是用一个脱字号(^)开头，再用圆括号包住参数列表；之后用花括号包住块体的代码。</p></blockquote>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">mySet</span> <span class="nl">objectsPassingTest</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="kt">id</span> <span class="n">obj</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Code goes here: Return YES if obj passes the test and NO if obj does not pass the test.</span>
-</span><span class='line'><span class="p">}];</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">[mySet objectsPassingTest:^(id obj, BOOL *stop) {
+    // Code goes here: Return YES if obj passes the test and NO if obj does not pass the test.
+}];
+</code></pre>
 
 <h4>Completion and Error Handlers</h4>
 
@@ -190,40 +159,23 @@
 
 <p><strong>Listing 1-1</strong> A completion-handler block</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">animateView:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-</span><span class='line'>    <span class="bp">CGRect</span> <span class="n">cacheFrame</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">imageView</span><span class="p">.</span><span class="n">frame</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">[</span><span class="bp">UIView</span> <span class="nl">animateWithDuration</span><span class="p">:</span><span class="mf">1.5</span> <span class="nl">animations</span><span class="p">:</span><span class="o">^</span><span class="p">{</span>
-</span><span class='line'>        <span class="bp">CGRect</span> <span class="n">newFrame</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">imageView</span><span class="p">.</span><span class="n">frame</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">newFrame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">newFrame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="mf">150.0</span><span class="p">;</span>
-</span><span class='line'>        <span class="nb">self</span><span class="p">.</span><span class="n">imageView</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">newFrame</span><span class="p">;</span>
-</span><span class='line'>        <span class="nb">self</span><span class="p">.</span><span class="n">imageView</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>                    <span class="nl">completion</span><span class="p">:</span><span class="o">^</span> <span class="p">(</span><span class="kt">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                        <span class="k">if</span> <span class="p">(</span><span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                            <span class="c1">// Revert image view to original.</span>
-</span><span class='line'>                            <span class="nb">self</span><span class="p">.</span><span class="n">imageView</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">cacheFrame</span><span class="p">;</span>
-</span><span class='line'>                            <span class="nb">self</span><span class="p">.</span><span class="n">imageView</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
-</span><span class='line'>                         <span class="p">}</span>
-</span><span class='line'>    <span class="p">}];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">- (IBAction)animateView:(id)sender {
+    CGRect cacheFrame = self.imageView.frame;
+    [UIView animateWithDuration:1.5 animations:^{
+        CGRect newFrame = self.imageView.frame;
+        newFrame.origin.y = newFrame.origin.y + 150.0;
+        self.imageView.frame = newFrame;
+        self.imageView.alpha = 0.2;
+    }
+                    completion:^ (BOOL finished) {
+                        if (finished) {
+                            // Revert image view to original.
+                            self.imageView.frame = cacheFrame;
+                            self.imageView.alpha = 1.0;
+                         }
+    }];
+}
+</code></pre>
 
 <p>Some framework methods have error handlers, which are block parameters similar to completion handlers. The method invokes them (and passes in an <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSError_Class/index.html#//apple_ref/occ/cl/NSError">NSError</a> object) when it cannot complete its task because of some error condition. You typically implement an error handler to inform the user about the error.</p>
 
@@ -240,26 +192,16 @@
 <p><strong>Listing 1-2</strong> Adding an object as an observer and
 handling a notification using a block</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">applicationDidFinishLaunching:</span><span class="p">(</span><span class="bp">NSNotification</span> <span class="o">*</span><span class="p">)</span><span class="nv">aNotification</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">opQ</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSOperationQueue</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[[</span><span class="bp">NSNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span> <span class="nl">addObserverForName</span><span class="p">:</span><span class="s">@&quot;CustomOperationCompleted&quot;</span>
-</span><span class='line'>            <span class="nl">object</span><span class="p">:</span><span class="nb">nil</span> <span class="nl">queue</span><span class="p">:</span><span class="n">opQ</span>
-</span><span class='line'>        <span class="nl">usingBlock</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="bp">NSNotification</span> <span class="o">*</span><span class="n">notif</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="bp">NSNumber</span> <span class="o">*</span><span class="n">theNum</span> <span class="o">=</span> <span class="p">[</span><span class="n">notif</span><span class="p">.</span><span class="n">userInfo</span> <span class="nl">objectForKey</span><span class="p">:</span><span class="s">@&quot;NumberOfItemsProcessed&quot;</span><span class="p">];</span>
-</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Number of items processed: %i&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">theNum</span> <span class="n">intValue</span><span class="p">]);</span>
-</span><span class='line'>    <span class="p">}];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    opQ = [[NSOperationQueue alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"CustomOperationCompleted"
+            object:nil queue:opQ
+        usingBlock:^(NSNotification *notif) {
+        NSNumber *theNum = [notif.userInfo objectForKey:@"NumberOfItemsProcessed"];
+        NSLog(@"Number of items processed: %i", [theNum intValue]);
+    }];
+}
+</code></pre>
 
 <h4>Enumeration</h4>
 
@@ -269,14 +211,10 @@ handling a notification using a block</p>
 
 <blockquote><p>Foundation 框架中的集合类型（<a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSArray_Class/index.html#//apple_ref/occ/cl/NSArray">NSArray</a>， <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSDictionary_Class/index.html#//apple_ref/occ/cl/NSDictionary">NSDictionary</a>， <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSSet_Class/index.html#//apple_ref/occ/cl/NSSet">NSSet</a>，和 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSIndexSet_Class/index.html#//apple_ref/occ/cl/NSIndexSet">NSIndexSet</a>）声明了一些针对特定集合的枚举方法，这些方法支持客户端利用块代码来操作或测试每一个枚举项。换句话说，这些方法实现了和下面这种快速枚举结构相同的功能：</p></blockquote>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="k">for</span> <span class="p">(</span><span class="kt">id</span> <span class="n">item</span> <span class="k">in</span> <span class="n">collection</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Code to operate on each item in turn.</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc"> for (id item in collection) {
+    // Code to operate on each item in turn.
+}
+</code></pre>
 
 <p>There are two general forms of the enumeration methods that take blocks. The first are methods whose names begin with enumerate and do not return a value. The block for these methods performs some work on each enumerated item. The block parameter of the second type of method is preceded by passingTest; this kind of method returns an integer or an NSIndexSet object. The block for these methods performs a test on each enumerated item and returns YEStrue if the item passes the test. The integer or index set identifies the object or objects in the original collection that passed the test.</p>
 
@@ -288,38 +226,22 @@ handling a notification using a block</p>
 
 <p><strong>Listing 1-3</strong> Processing enumerated arrays using two blocks</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="bp">NSString</span> <span class="o">*</span><span class="n">area</span> <span class="o">=</span> <span class="s">@&quot;Europe&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="bp">NSArray</span> <span class="o">*</span><span class="n">timeZoneNames</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSTimeZone</span> <span class="n">knownTimeZoneNames</span><span class="p">];</span>
-</span><span class='line'><span class="bp">NSMutableArray</span> <span class="o">*</span><span class="n">areaArray</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSMutableArray</span> <span class="nl">arrayWithCapacity</span><span class="p">:</span><span class="mi">1</span><span class="p">];</span>
-</span><span class='line'><span class="bp">NSIndexSet</span> <span class="o">*</span><span class="n">areaIndexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">timeZoneNames</span> <span class="nl">indexesOfObjectsWithOptions</span><span class="p">:</span><span class="n">NSEnumerationConcurrent</span>
-</span><span class='line'>                                <span class="nl">passingTest</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="kt">id</span> <span class="n">obj</span><span class="p">,</span> <span class="bp">NSUInteger</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="bp">NSString</span>  <span class="o">*</span><span class="n">tmpStr</span> <span class="o">=</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">obj</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">[</span><span class="n">tmpStr</span> <span class="nl">hasPrefix</span><span class="p">:</span><span class="n">area</span><span class="p">];</span>
-</span><span class='line'><span class="p">}];</span>
-</span><span class='line'>
-</span><span class='line'><span class="bp">NSArray</span> <span class="o">*</span><span class="n">tmpArray</span> <span class="o">=</span> <span class="p">[</span><span class="n">timeZoneNames</span> <span class="nl">objectsAtIndexes</span><span class="p">:</span><span class="n">areaIndexes</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">tmpArray</span> <span class="nl">enumerateObjectsWithOptions</span><span class="p">:</span><span class="n">NSEnumerationConcurrent</span><span class="o">|</span><span class="n">NSEnumerationReverse</span>
-</span><span class='line'>                           <span class="nl">usingBlock</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="kt">id</span> <span class="n">obj</span><span class="p">,</span> <span class="bp">NSUInteger</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                               <span class="p">[</span><span class="n">areaArray</span> <span class="nl">addObject</span><span class="p">:[</span><span class="n">obj</span> <span class="nl">substringFromIndex</span><span class="p">:[</span><span class="n">area</span> <span class="n">length</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]];</span>
-</span><span class='line'><span class="p">}];</span>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Cities in %@ time zone:%@&quot;</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">areaArray</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="objc">NSString *area = @"Europe";
+NSArray *timeZoneNames = [NSTimeZone knownTimeZoneNames];
+NSMutableArray *areaArray = [NSMutableArray arrayWithCapacity:1];
+NSIndexSet *areaIndexes = [timeZoneNames indexesOfObjectsWithOptions:NSEnumerationConcurrent
+                                passingTest:^(id obj, NSUInteger idx, BOOL *stop) {
+    NSString  *tmpStr = (NSString *)obj;
+    return [tmpStr hasPrefix:area];
+}];
 
+NSArray *tmpArray = [timeZoneNames objectsAtIndexes:areaIndexes];
+[tmpArray enumerateObjectsWithOptions:NSEnumerationConcurrent|NSEnumerationReverse
+                           usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                               [areaArray addObject:[obj substringFromIndex:[area length]+1]];
+}];
+NSLog(@"Cities in %@ time zone:%@", area, areaArray);
+</code></pre>
 
 <p>The stop parameter in each of these enumeration methods (which is not used in the example) allows the block to pass YEStrue by reference back to the method to tell it to quit enumerating. You do this when you just want to find the first item in the collection that matches some criteria.</p>
 
@@ -332,32 +254,19 @@ handling a notification using a block</p>
 
 <p><strong>Listing 1-4</strong> Using a block to find matching substrings in a string</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="bp">NSString</span> <span class="o">*</span><span class="n">musician</span> <span class="o">=</span> <span class="s">@&quot;Beatles&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="bp">NSString</span> <span class="o">*</span><span class="n">musicDates</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSString</span> <span class="nl">stringWithContentsOfFile</span><span class="p">:</span>
-</span><span class='line'>    <span class="s">@&quot;/usr/share/calendar/calendar.music&quot;</span>
-</span><span class='line'>    <span class="nl">encoding</span><span class="p">:</span><span class="n">NSASCIIStringEncoding</span> <span class="nl">error</span><span class="p">:</span><span class="nb">NULL</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">musicDates</span> <span class="nl">enumerateSubstringsInRange</span><span class="p">:</span><span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="n">musicDates</span> <span class="n">length</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>    <span class="nl">options</span><span class="p">:</span><span class="n">NSStringEnumerationByLines</span>
-</span><span class='line'>    <span class="nl">usingBlock</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="n">substring</span><span class="p">,</span> <span class="n">NSRange</span> <span class="n">substringRange</span><span class="p">,</span> <span class="n">NSRange</span> <span class="n">enclosingRange</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>           <span class="n">NSRange</span> <span class="n">found</span> <span class="o">=</span> <span class="p">[</span><span class="n">substring</span> <span class="nl">rangeOfString</span><span class="p">:</span><span class="n">musician</span><span class="p">];</span>
-</span><span class='line'>           <span class="k">if</span> <span class="p">(</span><span class="n">found</span><span class="p">.</span><span class="n">location</span> <span class="o">!=</span> <span class="n">NSNotFound</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">substring</span><span class="p">);</span>
-</span><span class='line'>           <span class="p">}</span>
-</span><span class='line'>      <span class="p">}];</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">NSString *musician = @"Beatles";
+NSString *musicDates = [NSString stringWithContentsOfFile:
+    @"/usr/share/calendar/calendar.music"
+    encoding:NSASCIIStringEncoding error:NULL];
+[musicDates enumerateSubstringsInRange:NSMakeRange(0, [musicDates length]-1)
+    options:NSStringEnumerationByLines
+    usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+           NSRange found = [substring rangeOfString:musician];
+           if (found.location != NSNotFound) {
+                NSLog(@"%@", substring);
+           }
+      }];
+</code></pre>
 
 <h4>View Animation and Transitions</h4>
 
@@ -377,18 +286,12 @@ handling a notification using a block</p>
 
 <p><strong>Listing 1-5</strong> Simple animation of a view using blocks</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="bp">UIView</span> <span class="nl">animateWithDuration</span><span class="p">:</span><span class="mf">0.2</span> <span class="nl">animations</span><span class="p">:</span><span class="o">^</span><span class="p">{</span>
-</span><span class='line'>        <span class="n">view</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span> <span class="nl">completion</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="kt">BOOL</span> <span class="n">finished</span><span class="p">){</span>
-</span><span class='line'>        <span class="p">[</span><span class="n">view</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}];</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">[UIView animateWithDuration:0.2 animations:^{
+        view.alpha = 0.0;
+    } completion:^(BOOL finished){
+        [view removeFromSuperview];
+    }];
+</code></pre>
 
 <p>Other UIView class methods perform transitions between two views, including flips and curls. The example invocation of <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/transitionWithView:duration:options:animations:completion:">transitionWithView:duration:options:animations:completion:</a> in Listing 1-6 animates the replacement of a subview as a flip-left transition. (It does not implement a completion handler.)</p>
 
@@ -396,22 +299,14 @@ handling a notification using a block</p>
 
 <p><strong>Listing 1-6</strong> Implementing a flip transition between two views</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="bp">UIView</span> <span class="nl">transitionWithView</span><span class="p">:</span><span class="n">containerView</span> <span class="nl">duration</span><span class="p">:</span><span class="mf">0.2</span>
-</span><span class='line'>                   <span class="nl">options</span><span class="p">:</span><span class="n">UIViewAnimationOptionTransitionFlipFromLeft</span>
-</span><span class='line'>                <span class="nl">animations</span><span class="p">:</span><span class="o">^</span><span class="p">{</span>
-</span><span class='line'>                    <span class="p">[</span><span class="n">fromView</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
-</span><span class='line'>                    <span class="p">[</span><span class="n">containerView</span> <span class="nl">addSubview</span><span class="p">:</span><span class="n">toView</span><span class="p">]</span>
-</span><span class='line'>                <span class="p">}</span>
-</span><span class='line'>                <span class="nl">completion</span><span class="p">:</span><span class="nb">NULL</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">[UIView transitionWithView:containerView duration:0.2
+                   options:UIViewAnimationOptionTransitionFlipFromLeft
+                animations:^{
+                    [fromView removeFromSuperview];
+                    [containerView addSubview:toView]
+                }
+                completion:NULL];
+</code></pre>
 
 <h4>Sorting</h4>
 
@@ -421,10 +316,8 @@ handling a notification using a block</p>
 
 <blockquote><p>在 Foundation 框架中有一个 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Miscellaneous/Foundation_DataTypes/index.html#//apple_ref/c/tdef/NSComparator">NSComparator</a> 类型用于比较两个项目：</p></blockquote>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">typedef</span> <span class="nf">NSComparisonResult</span> <span class="p">(</span><span class="o">^</span><span class="n">NSComparator</span><span class="p">)(</span><span class="kt">id</span> <span class="n">obj1</span><span class="p">,</span> <span class="kt">id</span> <span class="n">obj2</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">typedef NSComparisonResult (^NSComparator)(id obj1, id obj2);
+</code></pre>
 
 <p>NSComparator is a block type that takes two objects and returns an <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Miscellaneous/Foundation_Constants/index.html#//apple_ref/c/tdef/NSComparisonResult">NSComparisonResult</a> value. It is a parameter in methods of <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSSortDescriptor_Class/index.html#//apple_ref/occ/cl/NSSortDescriptor">NSSortDescriptor</a>, <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSArray_Class/index.html#//apple_ref/occ/cl/NSArray">NSArray</a>, and <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSDictionary_Class/index.html#//apple_ref/occ/cl/NSDictionary">NSDictionary</a> and is used by instances of those classes for sorting. Listing 1-7 gives an example of its use.</p>
 
@@ -433,36 +326,21 @@ handling a notification using a block</p>
 
 <p><strong>Listing 1-7</strong> Sorting an array using an NSComparator block</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="bp">NSArray</span> <span class="o">*</span><span class="n">stringsArray</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSArray</span> <span class="nl">arrayWithObjects</span><span class="p">:</span>
-</span><span class='line'>                                 <span class="s">@&quot;string 1&quot;</span><span class="p">,</span>
-</span><span class='line'>                                 <span class="s">@&quot;String 21&quot;</span><span class="p">,</span>
-</span><span class='line'>                                 <span class="s">@&quot;string 12&quot;</span><span class="p">,</span>
-</span><span class='line'>                                 <span class="s">@&quot;String 11&quot;</span><span class="p">,</span>
-</span><span class='line'>                                 <span class="s">@&quot;String 02&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'><span class="k">static</span> <span class="n">NSStringCompareOptions</span> <span class="n">comparisonOptions</span> <span class="o">=</span> <span class="n">NSCaseInsensitiveSearch</span> <span class="o">|</span> <span class="n">NSNumericSearch</span> <span class="o">|</span>
-</span><span class='line'>        <span class="n">NSWidthInsensitiveSearch</span> <span class="o">|</span> <span class="n">NSForcedOrderingSearch</span><span class="p">;</span>
-</span><span class='line'><span class="bp">NSLocale</span> <span class="o">*</span><span class="n">currentLocale</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSLocale</span> <span class="n">currentLocale</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSComparator</span> <span class="n">finderSort</span> <span class="o">=</span> <span class="o">^</span><span class="p">(</span><span class="kt">id</span> <span class="n">string1</span><span class="p">,</span> <span class="kt">id</span> <span class="n">string2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">NSRange</span> <span class="n">string1Range</span> <span class="o">=</span> <span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="n">string1</span> <span class="n">length</span><span class="p">]);</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">[</span><span class="n">string1</span> <span class="nl">compare</span><span class="p">:</span><span class="n">string2</span> <span class="nl">options</span><span class="p">:</span><span class="n">comparisonOptions</span> <span class="nl">range</span><span class="p">:</span><span class="n">string1Range</span> <span class="nl">locale</span><span class="p">:</span><span class="n">currentLocale</span><span class="p">];</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;finderSort: %@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">stringsArray</span> <span class="nl">sortedArrayUsingComparator</span><span class="p">:</span><span class="n">finderSort</span><span class="p">]);</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="objc">NSArray *stringsArray = [NSArray arrayWithObjects:
+                                 @"string 1",
+                                 @"String 21",
+                                 @"string 12",
+                                 @"String 11",
+                                 @"String 02", nil];
+static NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch | NSNumericSearch |
+        NSWidthInsensitiveSearch | NSForcedOrderingSearch;
+NSLocale *currentLocale = [NSLocale currentLocale];
+NSComparator finderSort = ^(id string1, id string2) {
+    NSRange string1Range = NSMakeRange(0, [string1 length]);
+    return [string1 compare:string2 options:comparisonOptions range:string1Range locale:currentLocale];
+};
+NSLog(@"finderSort: %@", [stringsArray sortedArrayUsingComparator:finderSort]);
+</code></pre>
 
 <p>This example is taken from <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007502">Blocks Programming Topics</a>.</p>
 
@@ -493,25 +371,6 @@ handling a notification using a block</p>
 <blockquote><p>更多关于 GCD、NSOperationQueue 和 NSOperation 的信息，可以参阅 <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/ConcurrencyProgrammingGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008091">Concurrency Programming Guide</a> 文档。</p></blockquote>
 
 <p>-END-</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hello Big Big World, I'm Canvas Hsu]]></title>
-    <link href="http://GoGoCav.github.io/blog/2014/10/10/hello-big-big-world/"/>
-    <updated>2014-10-10T22:34:02+08:00</updated>
-    <id>http://GoGoCav.github.io/blog/2014/10/10/hello-big-big-world</id>
-    <content type="html"><![CDATA[<p>哈哈，俗套标题开场~</p>
-
-<p>我是 Canvas Hsu，网络昵称是 GoGoCav - Go Go Canvas 的意思。现实生活中朋友都叫我小伍。</p>
-
-<p>我于2008年毕业于华中科技大学电子与信息工程系，一直从事金融领域信息化建设方面的工作，先后就职于恒生集团、嘉实基金、广发基金。</p>
-
-<p>2014年5月，我离开了投身6年多的基金圈，寻求职业生涯或是人生的转变。目前我是一名自由职业者，经营着一间零食店，同时将更多的时间投入到各种感兴趣的事情中，例如 iOS 应用开发/UX 设计/读书等，还想学学吉他。</p>
-
-<p>也是因此，我终于有了时间写写博客，记录和分享一些我的学习、生活经历。</p>
-
-<p>感谢你发现这里，希望这不是我们的最后一次相遇。</p>
 ]]></content>
   </entry>
   
