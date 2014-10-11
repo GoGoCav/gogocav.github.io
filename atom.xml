@@ -4,7 +4,7 @@
   <title><![CDATA[Canvas Hsu]]></title>
   <link href="http://GoGoCav.github.io/atom.xml" rel="self"/>
   <link href="http://GoGoCav.github.io/"/>
-  <updated>2014-10-11T22:35:56+08:00</updated>
+  <updated>2014-10-11T23:54:41+08:00</updated>
   <id>http://GoGoCav.github.io/</id>
   <author>
     <name><![CDATA[Canvas Hsu]]></name>
@@ -512,6 +512,36 @@ handling a notification using a block</p>
 <p>也是因此，我终于有了时间写写博客，记录和分享一些我的学习、生活经历。</p>
 
 <p>感谢你发现这里，希望这不是我们的最后一次相遇。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[About Me]]></title>
+    <link href="http://GoGoCav.github.io/blog/2014/10/08/about-canvas-guan-yu-wo/"/>
+    <updated>2014-10-08T22:47:12+08:00</updated>
+    <id>http://GoGoCav.github.io/blog/2014/10/08/about-canvas-guan-yu-wo</id>
+    <content type="html"><![CDATA[<p>Hello, I am Canvas Hsu. Also known as GoGoCav - means GO GO CANVAS.</p>
+
+<p>你好，我是 Canvas Hsu。也被称作 GoGoCav （ 这是我的网络 id，意思是加油 Canvas ）。</p>
+
+<!-- more -->
+
+
+<p>Now I live in Guangzhou, China. Since 2008 I have been engaged in finance work until now.</p>
+
+<p>I&rsquo;m interested in read, art - believe it or not I started learning painting since I was 6, but now &hellip; - , and everything fresh about computer and Internet.</p>
+
+<p>My work skill are C and Oracle PL/SQL development. And recently I have started leaning iOS app development and some useful skill like Python, JavaScript and so on. I learned them for fun, and really enjoy in it.</p>
+
+<p>Thanks for coming here and wish we could be friends. I&rsquo;ll be appreciate if you leave a comment to me.</p>
+
+<p>我现在住在广州。我从2008年开始从事金融类的工作至今。</p>
+
+<p>我喜欢阅读、艺术（不管你信不信，我从6岁开始学习绘画，但现在…）以及一切和计算机/互联网相关的新鲜事物。</p>
+
+<p>我的工作技能是 C 语言和基于 Oracle 数据库的PL/SQL 开发。最近我开始学习 iOS 应用开发以及诸如 Python、 JavaScript 等等之类有用的技能。我学习这些纯粹是因为兴趣，并且乐在其中。</p>
+
+<p>谢谢你来到这里，希望我们能成为朋友 ：）如果你能给我留言，我会非常感谢。</p>
 ]]></content>
   </entry>
   
