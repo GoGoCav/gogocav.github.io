@@ -4,7 +4,7 @@
   <title><![CDATA[Canvas Hsu]]></title>
   <link href="http://GoGoCav.github.io/atom.xml" rel="self"/>
   <link href="http://GoGoCav.github.io/"/>
-  <updated>2014-10-12T00:04:37+08:00</updated>
+  <updated>2014-10-12T00:28:00+08:00</updated>
   <id>http://GoGoCav.github.io/</id>
   <author>
     <name><![CDATA[Canvas Hsu]]></name>
@@ -18,7 +18,9 @@
     <link href="http://GoGoCav.github.io/blog/2014/10/11/translation-a-short-practical-guide-to-blocks/"/>
     <updated>2014-10-11T20:45:46+08:00</updated>
     <id>http://GoGoCav.github.io/blog/2014/10/11/translation-a-short-practical-guide-to-blocks</id>
-    <content type="html"><![CDATA[<p>这是我的原创翻译的第一篇。</p>
+    <content type="html"><![CDATA[<h3>写在前面</h3>
+
+<p>这是我的原创翻译的第一篇。</p>
 
 <p>近期在阅读苹果官方文档的时候，突然萌生了想要翻译它的想法。一来是觉得可以加强阅读质量、加深印象，二来也可以练习一下英语理解能力，第三也是觉得可以为那些不愿意阅读英文文档的朋友尽一点微薄之力。反正现在没有工作，也是有些时间的（笑）。所以没有经过太多考虑，就开始做了起来。</p>
 
@@ -27,18 +29,20 @@
 <p>希望我的这点工作能对一些人产生帮助。
 如果对某些翻译存在异议，或者您也想加入我一起进行苹果文档的翻译工作，随时欢迎留言 ：D</p>
 
+<!-- more -->
+
+
+<hr />
+
 <h1>A Short Practical Guide to Blocks</h1>
 
 <h2>“块”的简要实践指南</h2>
 
-<!-- more -->
+<p><em>原文地址：<a href="https://developer.apple.com/library/ios/featuredarticles/Short_Practical_Guide_Blocks/index.html#//apple_ref/doc/uid/TP40009758-CH1-SW1">iOS Developer Library</a></em></p>
 
+<p><em>译者：<a href="http://gogocav.github.io">Canvas Hsu</a></em></p>
 
-<p>*
-原文地址：<a href="https://developer.apple.com/library/ios/featuredarticles/Short_Practical_Guide_Blocks/index.html#//apple_ref/doc/uid/TP40009758-CH1-SW1">iOS Developer Library</a>
-译者：<a href="http://gogocav.github.io">Canvas Hsu</a>
-日期：2014-10-11
-*</p>
+<p><em>日期：2014-10-11</em></p>
 
 <p>Blocks are a powerful C-language feature that is part of Cocoa application development. They are similar to “closures” and “lambdas” you may find in scripting and programming languages such as Ruby, Python, and Lisp. Although the syntax and storage details of blocks might at first glance seem cryptic, you’ll find that it’s actually quite easy to incorporate blocks into your projects’ code.</p>
 
@@ -520,12 +524,10 @@ handling a notification using a block</p>
     <link href="http://GoGoCav.github.io/blog/2014/10/08/about-canvas-guan-yu-wo/"/>
     <updated>2014-10-08T22:47:12+08:00</updated>
     <id>http://GoGoCav.github.io/blog/2014/10/08/about-canvas-guan-yu-wo</id>
-    <content type="html"><![CDATA[<p>Hello, I am Canvas Hsu. Also known as GoGoCav - means GO GO CANVAS.</p>
+    <content type="html"><![CDATA[<!-- more -->
 
-<p>你好，我是 Canvas Hsu。也被称作 GoGoCav （ 这是我的网络 id，意思是加油 Canvas ）。</p>
 
-<!-- more -->
-
+<p>Hello, I am Canvas Hsu. Also known as GoGoCav - means GO GO CANVAS.</p>
 
 <p>Now I live in Guangzhou, China. Since 2008 I have been engaged in finance work until now.</p>
 
@@ -534,6 +536,12 @@ handling a notification using a block</p>
 <p>My work skill are C and Oracle PL/SQL development. And recently I have started leaning iOS app development and some useful skill like Python, JavaScript and so on. I learned them for fun, and really enjoy in it.</p>
 
 <p>Thanks for coming here and wish we could be friends. I&rsquo;ll be appreciate if you leave a comment to me.</p>
+
+<hr />
+
+<h1>关于我</h1>
+
+<p>你好，我是 Canvas Hsu。也被称作 GoGoCav （ 这是我的网络 id，意思是加油 Canvas ）。</p>
 
 <p>我现在住在广州。我从2008年开始从事金融类的工作至今。</p>
 
