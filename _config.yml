@@ -101,7 +101,7 @@ google_analytics_tracking_id:
 facebook_like: false
 
 # Weibo
-weibo_user: canvas
+#weibo_user: canvas
 
 # Dribbble
 dribbble_user: gogocav
