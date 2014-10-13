@@ -4,7 +4,7 @@
   <title><![CDATA[Canvas Hsu]]></title>
   <link href="http://GoGoCav.github.io/atom.xml" rel="self"/>
   <link href="http://GoGoCav.github.io/"/>
-  <updated>2014-10-12T00:28:00+08:00</updated>
+  <updated>2014-10-13T14:31:50+08:00</updated>
   <id>http://GoGoCav.github.io/</id>
   <author>
     <name><![CDATA[Canvas Hsu]]></name>
@@ -14,7 +14,177 @@
 
   
   <entry>
-    <title type="html"><![CDATA[原创译文 - A Short Practical Guide to Blocks]]></title>
+    <title type="html"><![CDATA[笔记 - Category and Class Extention]]></title>
+    <link href="http://GoGoCav.github.io/blog/2014/10/13/note-of-category-and-class-extention/"/>
+    <updated>2014-10-13T00:57:30+08:00</updated>
+    <id>http://GoGoCav.github.io/blog/2014/10/13/note-of-category-and-class-extention</id>
+    <content type="html"><![CDATA[<p>Objective-C 中如果想对类进行自定义和功能扩展，有2种常用技术：</p>
+
+<ul>
+<li>category 类别</li>
+<li>class extention 类扩展</li>
+</ul>
+
+
+<p>两者有相似之处，也有区别。</p>
+
+<h3>1. category 类别</h3>
+
+<p>Category 可以给任何类（包括不是由你自己实现的类，比如框架类）增加方法或函数。该类和子类的所有实例都可以使用它们。在运行时，这些方法和函数与类原生的方法和函数没有任何差别。</p>
+
+<!-- more -->
+
+
+<h4>语法形式：</h4>
+
+<p><em>ClassName+XYZCategoryName.h</em> (命名形式仅供参考，下同)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ClassName</span> <span class="nl">(XYZCategoryName)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp"># Category 不支持定义新的属性或实例变量</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">-</span> <span class="p">(</span><span class="n">SomeClass</span> <span class="o">*</span><span class="p">)</span><span class="nf">xyz_someAdditionInstanceMethod</span><span class="p">;</span>
+</span><span class='line'><span class="p">+</span> <span class="p">(</span><span class="n">SomeClass</span> <span class="o">*</span><span class="p">)</span><span class="nf">xyz_someAdditionClassMethod</span><span class="p">;</span> <span class="err">#</span> <span class="n">Category</span> <span class="err">支持类方法</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></br></p>
+
+<p><em>ClassName+XYZCategoryName.m</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &quot;ClassName+XYZCategoryName.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">ClassName</span> <span class="nl">(XYZCategoryName)</span>
+</span><span class='line'><span class="p">-</span> <span class="p">(</span><span class="n">SomeClass</span> <span class="o">*</span><span class="p">)</span><span class="nf">xyz_someAdditionInstanceMethod</span> <span class="p">{</span>
+</span><span class='line'>    <span class="cp"># implement code here</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">+</span> <span class="p">(</span><span class="n">SomeClass</span> <span class="o">*</span><span class="p">)</span><span class="nf">xyz_someAdditionClassMethod</span> <span class="p">{</span>
+</span><span class='line'>    <span class="cp"># implement code here</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>应用场景：</h4>
+
+<ol>
+<li>为类扩充功能。</li>
+<li>如果一个类的功能复杂，可以将功能分类、拆分到不同的 categories 中，分别在独立的文件中声明和实现。</li>
+</ol>
+
+
+<h4>注意事项：</h4>
+
+<ol>
+<li>Category 不支持声明新的类属性或实例变量。（类扩展技术 Class Extensions 支持）。</li>
+<li>Category 中新定义的方法或函数不能重名，建议对 category 名字和方法都增加前缀。</li>
+</ol>
+
+
+<p></br></p>
+
+<h3>2. Class Extension 类扩展</h3>
+
+<p>Class Extension 顾名思义是对类进行扩展，可以为有实现代码的类再声明一些新的属性、实例参数、方法或函数。</p>
+
+<p>类扩展又被称为匿名类别（anonymous category），因为类扩展的声明就如同声明一个名字为空的类别。也因此，类扩展新声明的方法和函数的实现，写在类本身的@implementation 代码段中。</p>
+
+<p>类扩展的 @interface 声明部分通常放到类实现所在的文件中，以达到类扩展私有化的目的。这也是类扩展最常用的场景。如果实在需要被外部的类访问类扩展的方法，则可以将类扩展的接口声明放到单独的 .h 头文件中，被需要它的代码引用。</p>
+
+<h4>语法形式：</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ClassName</span> <span class="p">()</span> <span class="p">{</span> <span class="err">#</span> <span class="err">类扩展也被称为匿名类别（</span><span class="n">anonymous</span> <span class="n">categories</span><span class="err">）</span>
+</span><span class='line'>    <span class="kt">id</span> <span class="n">_someExtendInstanceVariable</span><span class="p">;</span> <span class="err">#</span> <span class="err">类扩展支持添加实例变量</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@property</span> <span class="n">SomeClass</span> <span class="o">*</span><span class="n">someExtendProperty</span><span class="p">;</span> <span class="err">#</span> <span class="err">类扩展支持添加属性</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">SomeObject</span> <span class="o">*</span><span class="p">)</span><span class="n">someExtendMethod</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">ClassName</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">SomeObject</span> <span class="o">*</span><span class="p">)</span><span class="n">someExtendMethod</span> <span class="p">{</span>
+</span><span class='line'>    <span class="cp"># implement code here</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>应用场景：</h4>
+
+<ol>
+<li>通过类扩展隐藏一些私有信息。
+例如想实现某个类属性对外只读、对内可写入的效果，则可以在类扩展中以 readwrite 重定义这个属性，为其添加写入权限，但将类扩展的接口声明放到类实现文件中，达到私有化的效果。因此做到了这个属性对外只读、对内可读写。</li>
+<li>如果需要对某些特定的外部的类开通对类扩展私有方法或函数的访问，则可以将类扩展的接口声明放到独立的头文件中，供需要的代码引用。</li>
+</ol>
+
+
+<h4>注意事项：</h4>
+
+<ol>
+<li>类扩展可以声明新的属性和实例变量。这一点和类别不同。</li>
+<li>类扩展只能用在拥有实现源代码的类上面，像框架类这种没有实现源码的类是不能扩展的。类扩展声明的新属性和实例变量需要和类的方法实现同时编译，这样编译器才能合成新属性的存取方法和实例变量。</li>
+<li>类扩展的实现部分直接放到类本身的 @implementation 区块中。</li>
+<li>如果外部对象访问类扩展的私有属性或方法，编译器会报警。但其实也有办法通过动态运行时的特征（例如利用 NSObjet 的 performSelector:&hellip; 方法）实现外部对象对私有的类扩展方法的调用。</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[翻译 - A Short Practical Guide to Blocks]]></title>
     <link href="http://GoGoCav.github.io/blog/2014/10/11/translation-a-short-practical-guide-to-blocks/"/>
     <updated>2014-10-11T20:45:46+08:00</updated>
     <id>http://GoGoCav.github.io/blog/2014/10/11/translation-a-short-practical-guide-to-blocks</id>

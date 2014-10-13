@@ -3,6 +3,14 @@
   
   
   <url>
+    <loc>http://GoGoCav.github.io/blog/2014/10/13/note-of-category-and-class-extention/</loc>
+    
+    <lastmod>2014-10-13T00:57:30+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://GoGoCav.github.io/blog/2014/10/11/translation-a-short-practical-guide-to-blocks/</loc>
     
     <lastmod>2014-10-11T20:45:46+08:00</lastmod>
@@ -29,14 +37,14 @@
   
   <url>
     <loc>http://GoGoCav.github.io/blog/archives/</loc>
-    <lastmod>2014-10-12T00:28:00+08:00</lastmod>
+    <lastmod>2014-10-13T14:31:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://GoGoCav.github.io/</loc>
-    <lastmod>2014-10-12T00:28:00+08:00</lastmod>
+    <lastmod>2014-10-13T14:31:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
