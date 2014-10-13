@@ -4,7 +4,7 @@
   <title><![CDATA[Canvas Hsu]]></title>
   <link href="http://GoGoCav.github.io/atom.xml" rel="self"/>
   <link href="http://GoGoCav.github.io/"/>
-  <updated>2014-10-13T15:24:56+08:00</updated>
+  <updated>2014-10-13T23:30:38+08:00</updated>
   <id>http://GoGoCav.github.io/</id>
   <author>
     <name><![CDATA[Canvas Hsu]]></name>
@@ -12,6 +12,294 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[笔记 - 类和属性的学习记录]]></title>
+    <link href="http://GoGoCav.github.io/blog/2014/10/13/note-of-class/"/>
+    <updated>2014-10-13T23:13:32+08:00</updated>
+    <id>http://GoGoCav.github.io/blog/2014/10/13/note-of-class</id>
+    <content type="html"><![CDATA[<h2>笔记索引</h2>
+
+<ol>
+<li>类的初始化</li>
+<li>类的属性用来存储数据</li>
+<li>属性的特征
+
+<ul>
+<li>readwrite,readonly</li>
+<li>atomic, nonatomic</li>
+<li>strong, weak</li>
+<li>copy</li>
+</ul>
+</li>
+</ol>
+
+
+<!-- more -->
+
+
+<h2>ObjC 是一门动态语言</h2>
+
+<p>每一个对象都通过指针来寻址。在运行时，才会根据指针指向的内存内容来确定对象的类型。</p>
+
+<p>因此给指针给绑定的类型其实不重要。只要没有违反类的接口定义（例如你给某个对象的指针指定为 NSString 类型但是用该指针调用了一个不存在于 NSString 类中的方法），都可以通过编译。并且即便类型不对，在运行时也会根据指针找到并对象确定其正确的类型。</p>
+
+<h2>类的初始化</h2>
+
+<h4>语法形式</h4>
+
+<p>对象是存储在 heap 上的一片内存，通过指针跟踪。创建对象的一般形式：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">ClassName</span> <span class="o">*</span><span class="n">pointToObject</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ClassName</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>init 方法的一般格式：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span> <span class="nf">init</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// 初始化代码</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>知识要点</h4>
+
+<ol>
+<li><p>存储位置：
+本地变量：stack 。因此变量不需要手工管理内存。
+对象：heap 。因此对象需要内存管理。</p></li>
+<li><p>alloc 和 init 要套用。避免 init 返回的指针对象和 alloc 分配的不同。</p></li>
+<li><p>NSString，NSNumber等可以通过常量赋值的方式完成创建和初始化：
+NSString *string = @“Hello World!”;
+NSNumber *num = @3.14;</p></li>
+<li><p>只有不含属性和参数的对象才能使用 new 创建。
+统一起见建议统一使用 alloc init 方式创建对象。</p></li>
+<li><p>标量变量（scalar variable）在定义时最好立即赋初始值。否则内部是 stack 上的一片野值。</p></li>
+<li><p>指针在定义时默认指向nil，所以不立即赋值也可以。</p></li>
+<li><p>对比两个对象：
+== 对比两个对象指针是不是指向同一个地址；
+isEqual: 和 compare: 等方法才比较两个对象的内容。</p></li>
+<li><p>工厂方法用 id 做返回类型，用self来指自己，以子类继承使用。</p></li>
+</ol>
+
+
+<h2>类的属性用来存储数据</h2>
+
+<p>大多数属性背后都有一个用来存放数据的实例变量。
+编译器会为属性自动合成一个名为 _属性名的实例变量，实例方法可以直接访问它。</p>
+
+<p>例如 @property NSString *firstName; 背后由编译器自动合成的实例变量为 NSString *_firstName。</p>
+
+<p>如果要自己指定属性背后的实例变量名，使用如下语法：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">@</span><span class="n">implementaition</span> <span class="n">SomeClass</span>
+</span><span class='line'><span class="k">@synthesize</span> <span class="n">propertyName</span> <span class="o">=</span> <span class="n">instanceVariableName</span><span class="p">;</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>知识要点</h4>
+
+<ol>
+<li><p>init 方法中：要用属性的实例变量访问，不要用存取方法访问属性。
+因为这时候对象还没有完全初始化完成。</p></li>
+<li><p>存取方法也可以人工自己编写。在实现区块中实现对应的存取方法即可。</p></li>
+</ol>
+
+
+<h4>注意事项</h4>
+
+<ol>
+<li>编译器在自动合成存取方法同时自动合成属性的实例变量。
+因此，如果人工指定了一个属性所有存取方法（只读属性的 getter 或读写属性的 setter 和 getter），则编译器也不会自动合成该属性的实例变量。这种情况下需要手工合成属性的实例变量：</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@synthesize</span> <span class="n">property</span> <span class="o">=</span> <span class="n">_property</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>属性的特征</h2>
+
+<p>属性有如下几种特征：
+- readwrite（默认），readonly 读写性
+- atomic（默认），noatomic 原子性
+- strong（默认），weak 强弱关系
+- copy 复制</p>
+
+<h3>读写性</h3>
+
+<p>一个只读的属性在被初始化以后就不能再被重新赋值了，即使是属性所属的实例对象也不能再写入它。</p>
+
+<h4>知识要点</h4>
+
+<ol>
+<li>除了初始化函数以外的函数都无法再对只读的属性重新赋值。类内部的函数也不行。</li>
+</ol>
+
+
+<h4>注意事项</h4>
+
+<ol>
+<li>但是可以通过属性背后的实例变量来修改只读属性的值。</li>
+</ol>
+
+
+<h3>原子性</h3>
+
+<p>属性默认是原子性的。但是原子性的属性在读写时会占用更多资源。所以如果确定不会出现属性的原子性问题，可以将属性声明为非原子性的来提升性能。</p>
+
+<h4>注意事项</h4>
+
+<ol>
+<li><p>atomic 属性的 getter 和 setter 方法要么都自动合成，要么都自己实现，不能混合（例如自动合成一个，自己实现另一个）</p></li>
+<li><p>一个对象的所有属性都是 atomic 的，也不等于该对象为线程安全（thread safety）。atomic 属性的保护单元是单个属性，属性与属性之间的同步性无法保证。</p></li>
+</ol>
+
+
+<h3>强弱关系</h3>
+
+<p>对象保存在 heap 上，因此内存是动态分配的。
+我们只能通过指针跟踪 heap 上的对象，因此没有办法完全通过指针来判断它所指向的对象的生命周期。即使指针被释放了，也不表示它原来指向的内存可以被释放。</p>
+
+<p>那如何管理对象的生命周期呢？换一个角度来思考：简单来说，如果一个对象不再被任何人需要的时候，它就可以被释放了。因此，管理对象的生命周期这个问题，可以转变为管理对象与对象之间的关系。如果一个对象被另一个对象引用，说明它还有存在的意义，那么它的生命周期就不能结束。</p>
+
+<p>如果一个对象 A 依赖另一个对象 B ，我们就称作对象 A 拥有（take ownership of）对象 B，也称作对象 A 强引用（have strong reference to）对象 B。
+例如：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">XYZPerson</span>
+</span><span class='line'><span class="k">@property</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">firstName</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">XYZPerson</span> <span class="o">*</span><span class="n">aPerson</span> <span class="o">=</span> <span class="p">[[</span><span class="n">XYZPerson</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'><span class="n">aPerson</span><span class="p">.</span><span class="n">firstName</span> <span class="o">=</span> <span class="s">@&quot;Tommy&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>则 aPerson 这个对象强引用了 @“Tommy” 这个 NSString 对象。</p>
+
+<p>那么如果对象 A 被释放，对象 B 就不被其他对象强引用了（假设之前只有 A 拥有 B），那么 B 也随之释放。这就是 Obj-C 中对对象的内存释放的规则。Obj-C 中默认引用关系是强引用。</p>
+
+<p>那么如果两个对象互相依赖，即互相引用。最常见的两个对像互相引用的例子是 Delegation 设计模式中的委托对象（delegating object）和被委托对象（delegate object）。
+如果两个对象互相强引用，就形成了一个强引用闭环，导致这两个对象都无法被释放。</p>
+
+<p>因此引入了弱引用的概念：如果对象 A 弱引用对象 B，则 A 不构成对 B 的拥有。因此 B 的释放与否，与 A 是否引用自己无关。B 可以在 A 还弱引用着自己的情况下被释放。这样就可以打破强引用闭环。</p>
+
+<p>在 Delegation 设计模式中，我们通常让委托对象弱引用它的被委托对象，被委托对象强引用委托自己的对象。</p>
+
+<h4>语法格式</h4>
+
+<p>声明弱引用：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="k">weak</span><span class="p">)</span> <span class="kt">id</span> <span class="n">someObject</span><span class="p">;</span>
+</span><span class='line'><span class="bp">NSObject</span> <span class="o">*</span> <span class="k">__weak</span> <span class="n">someWeakVariable</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>知识要点</h4>
+
+<ol>
+<li><p>如果指向一个对象的强引用数归零，则该对象也自动被释放。</p></li>
+<li><p>弱引用不获得对被引用对象的所有权。因此被弱引用的对象可以在弱引用关系还存在的情况下被释放。当这种情况发生后，弱引用关系自动指向 nil。</p></li>
+<li><p>有一部分的类不支持 weak 特征，只能使用 unsafe_unretained 特征。
+unsafe_unretained 特征的差异是当被引用的对象被释后，引用对象不会自动指向nil，会变成一个野指针。</p></li>
+</ol>
+
+
+<h4>注意事项</h4>
+
+<ol>
+<li><p>由于 weak 变量会因为被引用的对象被释放而指向 nil，所以在使用 weak 变量时，有 weak 变量中途消失的风险。
+为了防止这种风险，一般的做法是再声明一个新的对象强引用这个 weak 变量（相当于 cache 该 weak 变量所指向的对象，防止它被释放）。使用结束后将这个cache变量指针指向nil以释放对weak变量的强引用。</p></li>
+<li><p>经典案例：
+以下案例中新创建出来的对象由于没有任何其他对象强引用它，所以创建之后就被释放，因此someObject指向nil：</p></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="bp">NSObject</span> <span class="o">*</span> <span class="k">__weak</span> <span class="n">someObject</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>复制</h2>
+
+<p>如果希望一个属性对象首次被赋值后不因为赋给它的对象改变而改变，则可以在声明属性的时候加上 copy 特征字。具有 copy 特征的属性在首次赋值以后，会生成一份备份。之后如果被赋予的对象发生改变，也不会影响到该属性的值。</p>
+
+<h4>语法格式</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="k">copy</span><span class="p">)</span> <span class="bp">NSObject</span> <span class="n">someVariable</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>知识要点</h4>
+
+<ol>
+<li>只有支持 NSCopying 协议的对象才能被声明copy属性。</li>
+</ol>
+
+
+<h4>注意事项</h4>
+
+<ol>
+<li>如果对 copy 属性做初始化，一定要记得在初始化赋值的时候使用 copy 消息。
+因为在 init 的时候是直接向属性背后的实例变量赋值。如果没有给被赋入的对象发送 copy 消息，会导致属性的 copy 特征失效。
+举例：</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithString:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">aString</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">_instanceVariableForCopyProperty</span> <span class="o">=</span> <span class="p">[</span><span class="n">aMutableString</span> <span class="k">copy</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果上例中直接采用 _instanceVariableForCopyProperty = aMutableString; 这样的初始化赋值，会导致 instanceVariableForCopyProperty 指向了一个可变字符串，当可变字符串变化时，该属性也随之变化。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[笔记 - Category and Class Extention]]></title>
