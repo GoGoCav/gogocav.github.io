@@ -1,6 +1,6 @@
 {% if index %}
 	<div class="meta">
-		<div class="date">{% include post/date.html %}{{ time }}</div>
+		<div class="date">{% include post/date.html %}{{ date　| date: "%b %e" }},&nbsp {{ date | date: "%Y"}}</div>
 		<div class="tags">{% include post/categories.html %}</div>
 	</div>
 	<h1 class="title" itemprop="name"><a href="{{ root_url }}{{ post.url }}" itemprop="url">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a></h1>
