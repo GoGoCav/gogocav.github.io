@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Javascript | Canvas Hsu]]></title>
   <link href="http://GoGoCav.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://GoGoCav.github.io/"/>
-  <updated>2014-10-14T22:34:32+08:00</updated>
+  <updated>2014-10-14T22:38:14+08:00</updated>
   <id>http://GoGoCav.github.io/</id>
   <author>
     <name><![CDATA[Canvas Hsu]]></name>
@@ -19,7 +19,7 @@
     <updated>2014-10-14T22:04:45+08:00</updated>
     <id>http://GoGoCav.github.io/blog/2014/10/14/html5-version-flappy-bird</id>
     <content type="html"><![CDATA[<p>最近自学了一下 JavaScript 和 Phaser 游戏框架。Phaser 是一个开源的 HTML5 游戏框架，支持 JavaScript 和 TypeScript 两种开发语言，对桌面端和移动端都有很好的支持。
-<img src="http://http://gogocav.github.io/images/post/phaser.jpg" alt="" /></p>
+<img src="http://gogocav.github.io/images/post/phaser.jpg" alt="" /></p>
 
 <p>作为练习，学着利用 Phaser 制作了一个 FlappyBird 的 HTML5 山寨版，在电脑或是手机浏览器上都可以试玩。</p>
 
