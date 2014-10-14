@@ -1,9 +1,11 @@
 ---
 layout: post
-title: "笔记 - Category and Class Extention"
+title: "笔记 - 类别（Category）和类扩展（Class Extention）"
 date: 2014-10-13 00:57:30 +0800
 comments: true
-categories: obj-c, note
+categories: 
+- obj-c
+- note
 ---
 
 Objective-C 中如果想对类进行自定义和功能扩展，有2种常用技术：
