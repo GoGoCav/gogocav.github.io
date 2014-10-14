@@ -4,7 +4,7 @@
   <title><![CDATA[Canvas Hsu]]></title>
   <link href="http://GoGoCav.github.io/atom.xml" rel="self"/>
   <link href="http://GoGoCav.github.io/"/>
-  <updated>2014-10-14T22:54:53+08:00</updated>
+  <updated>2014-10-14T23:02:51+08:00</updated>
   <id>http://GoGoCav.github.io/</id>
   <author>
     <name><![CDATA[Canvas Hsu]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[利用 Phaser 框架制作 HTML5版 FlappyBird]]></title>
+    <title type="html"><![CDATA[实践 - 利用 Phaser 框架制作 HTML5版 FlappyBird]]></title>
     <link href="http://GoGoCav.github.io/blog/2014/10/14/html5-version-flappy-bird/"/>
     <updated>2014-10-14T22:04:45+08:00</updated>
     <id>http://GoGoCav.github.io/blog/2014/10/14/html5-version-flappy-bird</id>
@@ -34,7 +34,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[笔记 - 类和属性的学习记录]]></title>
+    <title type="html"><![CDATA[笔记 - 类（Classes）和属性（Properties）]]></title>
     <link href="http://GoGoCav.github.io/blog/2014/10/13/note-of-class/"/>
     <updated>2014-10-13T23:13:32+08:00</updated>
     <id>http://GoGoCav.github.io/blog/2014/10/13/note-of-class</id>
@@ -322,7 +322,7 @@ unsafe_unretained 特征的差异是当被引用的对象被释后，引用对�
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[笔记 - Category and Class Extention]]></title>
+    <title type="html"><![CDATA[笔记 - 类别（Category）和类扩展（Class Extention）]]></title>
     <link href="http://GoGoCav.github.io/blog/2014/10/13/note-of-category-and-class-extention/"/>
     <updated>2014-10-13T00:57:30+08:00</updated>
     <id>http://GoGoCav.github.io/blog/2014/10/13/note-of-category-and-class-extention</id>
