@@ -8,7 +8,7 @@
 
 	
 	<meta name="description" content="Oct 22,&nbsp 2014 obj-c 一个特殊字符引发的 Bug 今天使用 Xcode 编写一个 objective-c 小程序的时候遇到一个小问题。
-程序根据整数 n 将一个字符 &ldquo;◼︎&rdquo; 重复 n 次，形成一个新的字符串 &ldquo;◼︎◼︎◼︎& &hellip;">
+程序根据整数 n 将一个字符 &ldquo;■&rdquo; 重复 n 次，形成一个新的字符串 &ldquo;■■■&hellip &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -114,7 +114,7 @@ Oct 22,&nbsp 2014</div>
 	<h1 class="title" itemprop="name"><a href="/blog/2014/10/22/a-bug-caused-by-a-special-character/" itemprop="url">一个特殊字符引发的 Bug</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<p>今天使用 Xcode 编写一个 objective-c 小程序的时候遇到一个小问题。
-程序根据整数 n 将一个字符 &ldquo;◼︎&rdquo; 重复 n 次，形成一个新的字符串 &ldquo;◼︎◼︎◼︎&hellip;◼︎&#8221;。
+程序根据整数 n 将一个字符 &ldquo;■&rdquo; 重复 n 次，形成一个新的字符串 &ldquo;■■■&hellip;■&#8221;。
 很显然要使用 NSString 类的 stringByPaddingToLength:withString:startingAtIndex: 方法。
 简化后的代码如下：</p>
 
@@ -125,20 +125,20 @@ Oct 22,&nbsp 2014</div>
 <span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 </span><span class='line'><span class="bp">NSString</span> <span class="o">*</span><span class="n">symbol</span> <span class="o">=</span> <span class="p">[</span><span class="s">@&quot;&quot;</span> <span class="nl">stringByPaddingToLength</span><span class="p">:</span><span class="n">n</span>
-</span><span class='line'>                                     <span class="nl">withString</span><span class="p">:</span><span class="s">@&quot;◼︎&quot;</span>
+</span><span class='line'>                                     <span class="nl">withString</span><span class="p">:</span><span class="s">@&quot;■&quot;</span>
 </span><span class='line'>                                <span class="nl">startingAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
 </span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">symbol</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>本来预期是打印出◼︎◼︎◼︎3个方块，结果系统始终打印出◼︎◼︎，只有2个方块。由于实际程序中涉及很多指针和变量的传递，第一反映是指针变量调用出现了问题，于是仔仔细细的从头到尾查了十几二十分钟涉及的指针和变量，都没有问题。之后尝试将 n 改成4，依然只输出了2︎个方块。突然反应过来，难道是字符◼︎的长度不是1？</p>
+<p>本来预期是打印出■■■3个方块，结果系统始终打印出■■，只有2个方块。由于实际程序中涉及很多指针和变量的传递，第一反映是指针变量调用出现了问题，于是仔仔细细的从头到尾查了十几二十分钟涉及的指针和变量，都没有问题。之后尝试将 n 改成4，依然只输出了2︎个方块。突然反应过来，难道是字符■的长度不是1？</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;length of %@ is %ld&quot;</span><span class="p">,</span> <span class="s">@&quot;◼︎&quot;</span><span class="p">,</span> <span class="s">@&quot;◼︎&quot;</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;length of %@ is %ld&quot;</span><span class="p">,</span> <span class="s">@&quot;■&quot;</span><span class="p">,</span> <span class="s">@&quot;■&quot;</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>输出结果：length of ◼︎ is 2</p>
+<p>输出结果：length of ■ is 2</p>
 
 <p>果然是这个原因。该字符是通过 Xcode 的 Special Character 工具找到的，后来在工具中找到了另外一个字长为1的方块替换，问题解决。记录一下，以便将来遇到特殊字符时能唤起敏感。</p>
 
