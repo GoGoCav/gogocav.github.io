@@ -3,6 +3,14 @@
   
   
   <url>
+    <loc>http://GoGoCav.github.io/blog/2014/10/22/a-bug-caused-by-a-special-character/</loc>
+    
+    <lastmod>2014-10-22T01:38:37+08:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://GoGoCav.github.io/blog/2014/10/14/html5-version-flappy-bird/</loc>
     
     <lastmod>2014-10-14T22:04:45+08:00</lastmod>
@@ -53,14 +61,14 @@
   
   <url>
     <loc>http://GoGoCav.github.io/blog/archives/</loc>
-    <lastmod>2014-10-14T23:02:51+08:00</lastmod>
+    <lastmod>2014-10-22T02:19:27+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://GoGoCav.github.io/</loc>
-    <lastmod>2014-10-14T23:02:51+08:00</lastmod>
+    <lastmod>2014-10-22T02:19:27+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

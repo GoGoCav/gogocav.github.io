@@ -7,7 +7,8 @@
 	<meta name="author" content="Canvas Hsu">
 
 	
-	<meta name="description" content="Oct 14,&nbsp 2014 game, javascript 实践 - 利用 Phaser 框架制作 HTML5版 FlappyBird 最近自学了一下 JavaScript 和 Phaser 游戏框架。Phaser 是一个开源的 HTML5 游戏框架，支持 JavaScript 和 &hellip;">
+	<meta name="description" content="Oct 22,&nbsp 2014 obj-c 一个特殊字符引发的 Bug 今天使用 Xcode 编写一个 objective-c 小程序的时候遇到一个小问题。
+程序根据整数 n 将一个字符 &ldquo;◼︎&rdquo; 重复 n 次，形成一个新的字符串 &ldquo;◼︎◼︎◼︎& &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +86,67 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+Oct 22,&nbsp 2014</div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/obj-c/'>obj-c</a>
+
+
+</div>
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/10/22/a-bug-caused-by-a-special-character/" itemprop="url">一个特殊字符引发的 Bug</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今天使用 Xcode 编写一个 objective-c 小程序的时候遇到一个小问题。
+程序根据整数 n 将一个字符 &ldquo;◼︎&rdquo; 重复 n 次，形成一个新的字符串 &ldquo;◼︎◼︎◼︎&hellip;◼︎&#8221;。
+很显然要使用 NSString 类的 stringByPaddingToLength:withString:startingAtIndex: 方法。
+简化后的代码如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'><span class="bp">NSString</span> <span class="o">*</span><span class="n">symbol</span> <span class="o">=</span> <span class="p">[</span><span class="s">@&quot;&quot;</span> <span class="nl">stringByPaddingToLength</span><span class="p">:</span><span class="n">n</span>
+</span><span class='line'>                                     <span class="nl">withString</span><span class="p">:</span><span class="s">@&quot;◼︎&quot;</span>
+</span><span class='line'>                                <span class="nl">startingAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">symbol</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>本来预期是打印出◼︎◼︎◼︎3个方块，结果系统始终打印出◼︎◼︎，只有2个方块。由于实际程序中涉及很多指针和变量的传递，第一反映是指针变量调用出现了问题，于是仔仔细细的从头到尾查了十几二十分钟涉及的指针和变量，都没有问题。之后尝试将 n 改成4，依然只输出了2︎个方块。突然反应过来，难道是字符◼︎的长度不是1？</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;length of %@ is %ld&quot;</span><span class="p">,</span> <span class="s">@&quot;◼︎&quot;</span><span class="p">,</span> <span class="s">@&quot;◼︎&quot;</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出结果：length of ◼︎ is 2</p>
+
+<p>果然是这个原因。该字符是通过 Xcode 的 Special Character 工具找到的，后来在工具中找到了另外一个字长为1的方块替换，问题解决。记录一下，以便将来遇到特殊字符时能唤起敏感。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">

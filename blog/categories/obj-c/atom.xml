@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Obj-c | Canvas Hsu]]></title>
   <link href="http://GoGoCav.github.io/blog/categories/obj-c/atom.xml" rel="self"/>
   <link href="http://GoGoCav.github.io/"/>
-  <updated>2014-10-14T23:02:51+08:00</updated>
+  <updated>2014-10-22T02:19:27+08:00</updated>
   <id>http://GoGoCav.github.io/</id>
   <author>
     <name><![CDATA[Canvas Hsu]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[一个特殊字符引发的 Bug]]></title>
+    <link href="http://GoGoCav.github.io/blog/2014/10/22/a-bug-caused-by-a-special-character/"/>
+    <updated>2014-10-22T01:38:37+08:00</updated>
+    <id>http://GoGoCav.github.io/blog/2014/10/22/a-bug-caused-by-a-special-character</id>
+    <content type="html"><![CDATA[<p>今天使用 Xcode 编写一个 objective-c 小程序的时候遇到一个小问题。
+程序根据整数 n 将一个字符 &ldquo;◼︎&rdquo; 重复 n 次，形成一个新的字符串 &ldquo;◼︎◼︎◼︎&hellip;◼︎&#8221;。
+很显然要使用 NSString 类的 stringByPaddingToLength:withString:startingAtIndex: 方法。
+简化后的代码如下：</p>
+
+<pre><code class="objc">int n = 3;
+NSString *symbol = [@"" stringByPaddingToLength:n
+                                     withString:@"◼︎"
+                                startingAtIndex:0];
+NSLog(@"%@", symbol);
+</code></pre>
+
+<p>本来预期是打印出◼︎◼︎◼︎3个方块，结果系统始终打印出◼︎◼︎，只有2个方块。由于实际程序中涉及很多指针和变量的传递，第一反映是指针变量调用出现了问题，于是仔仔细细的从头到尾查了十几二十分钟涉及的指针和变量，都没有问题。之后尝试将 n 改成4，依然只输出了2︎个方块。突然反应过来，难道是字符◼︎的长度不是1？
+<code>objc
+NSLog(@"length of %@ is %ld", @"◼︎", @"◼︎".length);
+</code>
+输出结果：length of ◼︎ is 2</p>
+
+<p>果然是这个原因。该字符是通过 Xcode 的 Special Character 工具找到的，后来在工具中找到了另外一个字长为1的方块替换，问题解决。记录一下，以便将来遇到特殊字符时能唤起敏感。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[笔记 - 类（Classes）和属性（Properties）]]></title>
