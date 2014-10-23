@@ -4,7 +4,7 @@
   <title><![CDATA[Canvas Hsu]]></title>
   <link href="http://GoGoCav.github.io/atom.xml" rel="self"/>
   <link href="http://GoGoCav.github.io/"/>
-  <updated>2014-10-23T15:51:51+08:00</updated>
+  <updated>2014-10-23T15:55:51+08:00</updated>
   <id>http://GoGoCav.github.io/</id>
   <author>
     <name><![CDATA[Canvas Hsu]]></name>
@@ -19,7 +19,7 @@
     <updated>2014-10-23T15:25:26+08:00</updated>
     <id>http://GoGoCav.github.io/blog/2014/10/23/view-controller-lifecycle</id>
     <content type="html"><![CDATA[<p>画了一个 ViewController 生命周期的导图，以便记忆查阅：
-!()[<a href="http://gogocav.github.io/images/post/view_controller_lifecycle-gogocav.png">http://gogocav.github.io/images/post/view_controller_lifecycle-gogocav.png</a>]</p>
+<img src="http://gogocav.github.io/images/post/view_controller_lifecycle-gogocav.png" alt="" /></p>
 ]]></content>
   </entry>
   
